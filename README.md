@@ -6,10 +6,10 @@ A robust, lightweight Linux container runtime developed in C, featuring a long-r
 
 ## 1. Team Information
 
-- **Name:** kmanu28 (Student 1) 
-- **SRN:** [Insert SRN]
-- **Name:** [Student 2 Name]
-- **SRN:** [Insert SRN]
+- **Name:** Manu Kudukundi
+- **SRN:** PES1UG24CS673
+- **Name:** Muruli H
+- **SRN:** PES1UG24CS676
 
 ---
 
