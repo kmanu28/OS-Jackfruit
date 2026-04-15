@@ -4,6 +4,28 @@ A robust, lightweight Linux container runtime developed in C, featuring a long-r
 
 ---
 
+## Repository Structure
+
+```
+OS-Jackfruit/
+├── src/                     # Core source files
+│   ├── engine.c             # User-space supervisor and CLI runtime
+│   └── monitor.c            # Kernel-space LKM memory monitor
+├── include/
+│   └── monitor_ioctl.h      # Shared ioctl definitions (user ↔ kernel)
+├── workloads/               # Test workload programs
+│   ├── cpu_hog.c            # CPU-bound workload
+│   ├── memory_hog.c         # Memory-bound workload
+│   └── io_pulse.c           # I/O-bound workload
+├── scripts/
+│   └── environment-check.sh # Pre-flight environment checker
+├── boilerplate/             # Original starter files (CI smoke-check)
+├── Makefile                 # Unified build system
+└── README.md
+```
+
+---
+
 ## 1. Team Information
 
 - **Name:** Manu Kudukundi
@@ -70,8 +92,9 @@ sudo ./engine ps
 sudo ./engine logs alpha
 
 # Run a memory test inside a container
-# (Ensure memory_hog is copied: cp memory_hog ./rootfs-alpha/)
-# sudo ./engine run gamma ./rootfs-alpha /memory_hog
+# (Ensure memory_hog is copied into the rootfs first)
+cp workloads/memory_hog ./rootfs-alpha/
+sudo ./engine run gamma ./rootfs-alpha /memory_hog
 ```
 
 ### Cleanup
@@ -147,8 +170,8 @@ Experiments mapping computational workloads (`cpu_hog.c`) paired sequentially ag
 
 ## 6. Scheduler Experiment Results
 
-### Overview Scenario 
-Experiment parameters tested parallel permutations utilizing CPU-bound instructions (`cpu_hog.c`).
+### Overview Scenario
+Experiment parameters tested parallel permutations utilizing CPU-bound instructions (`workloads/cpu_hog.c`).
 
 | Configuration | Container A (Nice 0) | Container B (Nice 19) | Container C (Nice -10) |
 |---------------|----------------------|-----------------------|------------------------|
